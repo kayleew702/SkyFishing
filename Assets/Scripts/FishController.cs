@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class FishController : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rb;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     {
         if (transform.position.y > Camera.main.WorldToViewportPoint(transform.position).y)
         {
-            Debug.Log("Enemy destroyed");
+            Debug.Log("Fish destroyed");
             Destroy(this.gameObject);
         }
     }
