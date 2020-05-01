@@ -55,6 +55,7 @@ public class FrogController : MonoBehaviour
 
         //frog begins diving when the CameraMovement code says so
         Dive();
+        Reel();
 
     }
 
