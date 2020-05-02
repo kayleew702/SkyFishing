@@ -32,8 +32,12 @@ public class FrogController : MonoBehaviour
 
     Animator animator;
 
+    public bool reachedReelPos = false;
     public bool isReeling = false;
     public bool isDiving = false;
+    public bool reachedSurface = false;
+
+    public int currentDepth;
 
     //Gives access to fish collected text in UI
     private Text fishCollectedText;
@@ -45,17 +49,26 @@ public class FrogController : MonoBehaviour
 
         //Gives access to fish collected text in UI
         fishCollectedText = GameObject.Find("FishCollectedText").GetComponent<Text>();
+
+        isDiving = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         Move();
         BoundMovement();
 
-        //frog begins diving when the CameraMovement code says so
+        //frog begins diving at the beginning of the level
         Dive();
+
+        //frog is reeled in when it collides with an enemy or a fish
         Reel();
+
+        //after reeling and the depth meter is 0, the frog will return to the start position
+        StartPos();
+
 
     }
 
@@ -100,16 +113,9 @@ public class FrogController : MonoBehaviour
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
 
-            if (isReeling == true)
+            if (isReeling == false)
             {
-
-
-            }
-
-            else if (isReeling == false)
-            {
-
-
+                isReeling = true;
                 Reel();
             }
         }
@@ -122,25 +128,84 @@ public class FrogController : MonoBehaviour
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
 
-            if (isReeling == true)
+            if (isReeling == false)
             {
-
-            }
-
-            else if (isReeling == false)
-            {
+                isReeling = true;
                 Reel();
             }
 
         }
     }
 
+    public void ReelPosition()
+    {
+        //move to reel position
+
+        float reelingPositionY = reelingPosition.transform.position.y;
+        float reelingPositionBuffer = reelingPositionY - 1;
+
+        if ((reachedReelPos == false) && (isReeling == true))
+        {
+            if (newYPos < this.transform.position.y)
+            {
+                newYPos = this.transform.position.y;
+            }
+            newYPos -= yPosIncrement;
+
+            //currentPosition = Vector3.Lerp(this.transform.position,
+            //new Vector3(
+            //this.transform.position.x,
+            //Mathf.Clamp(newYPos, this.transform.position.y, reelingPositionBuffer),
+            // this.transform.position.z),
+            //  smoothSpeed);
+
+            currentPosition = new Vector3(this.transform.position.x, newYPos, this.transform.position.z);
+
+            this.transform.position = currentPosition;
+        }
+
+        //when the frog reaches the diving position, stop moving down
+        if (this.transform.position.y <= reelingPositionY)
+        {
+            Debug.Log("Reached reel position");
+            reachedReelPos = true;
+        }
+    }
+
     public void Reel()
     {
-        isReeling = true;
-        //move back to start position
 
+        ReelPosition();
 
+        currentDepth = GameObject.Find("DepthMeter").GetComponent<DepthController>().currentDepth;
+
+        if (currentDepth == 0)
+        {
+            isReeling = false;
+            reachedSurface = true;
+        }
+
+        //when the depth meter reaches 0, isReeling = false
+        //and the score is displayed
+    }
+
+    public void StartPos()
+    {
+        //when the depth meter is 0, the frog goes to the top of the water (back to its starting point)
+        float startPositionY = startPosition.transform.position.y;
+        float startPositionBuffer = startPositionY + 1;
+
+        if (reachedSurface == true)
+        {
+            currentPosition = Vector3.Lerp(this.transform.position,
+                new Vector3(
+                    this.transform.position.x,
+                    Mathf.Clamp(newYPos, startPositionBuffer, this.transform.position.y),
+                    this.transform.position.z),
+                smoothSpeed);
+
+            this.transform.position = currentPosition;
+        }
     }
 
     public void Dive()

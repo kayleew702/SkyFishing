@@ -9,36 +9,38 @@ public class CameraMovement : MonoBehaviour
 
     private float smoothSpeed = 0.01f;
     public float cameraIncrement = .01f;
+    public float reelingCamInc = 10;
 
     public bool movingDown = true;
-    public bool reel = false;
-
-    //this will come from the frog controller code
-    public bool isDiving;
-    public GameObject frogPlayer;
 
     public Vector3 currentPosition;
     public float newYPos;
-
-    public GameObject diveBoundaryObj;
-    public float diveBoundary;
-
     private float cameraHalfHeight;
 
+    public GameObject frogPlayer;
+    public GameObject reelBoundaryObj;
+    public GameObject diveBoundaryObj;
+    public GameObject surfaceBoundaryObj;
+
+    public float startingPoint;
+    public float diveBoundary;
+
+    public bool isReeling;
+    public bool reachedSurface;
 
 
     //currentPosition will start with the initial position
 
     void Start()
     {
+        startingPoint = Camera.main.transform.position.y;
+
         movingDown = true;
 
         //find half the height of the camera's aspect ratio
         cameraHalfHeight = Camera.main.orthographicSize;
 
-        //gets bool isDiving from the Frog Controller script
-        frogPlayer = GameObject.Find("Frog");
-        isDiving = frogPlayer.GetComponent<FrogController>().isDiving;
+        FrogBools();
     }
 
     void FixedUpdate()
@@ -48,9 +50,18 @@ public class CameraMovement : MonoBehaviour
         //camera will move down if reachedEnd == false
         MoveDown();
 
-        //camera will move up if reel == true
-        MoveUp();
+        ReelingPos();
 
+        ReachSurface();
+
+    }
+
+    public void FrogBools()
+    {
+        //gets bools from the Frog Controller script
+        frogPlayer = GameObject.Find("Frog");
+        isReeling = frogPlayer.GetComponent<FrogController>().isReeling;
+        reachedSurface = frogPlayer.GetComponent<FrogController>().reachedSurface;
     }
 
     public void MoveDown()
@@ -64,6 +75,7 @@ public class CameraMovement : MonoBehaviour
         if (movingDown == true)
         {
             //both the camera and frogPosSnap move down by the cameraIncrement
+            cameraIncrement = reelingCamInc;
             newYPos -= cameraIncrement;
 
             currentPosition = Vector3.Lerp(this.transform.position,
@@ -74,26 +86,71 @@ public class CameraMovement : MonoBehaviour
                 smoothSpeed);
 
             this.transform.position = currentPosition;
-
-
         }
 
-
-
-
-        //when isDiving == false in the frog controlle code, the MoveDown() function will end
-        if (isDiving == false)
+        if (this.transform.position.y <= diveBoundary)
         {
-            Debug.Log("Reached Bottom");
-            //movingDown = false;
+            movingDown = false;
         }
-
-
 
     }
 
-    public void MoveUp()
+    public void ReelingPos()
     {
+        float reelBoundary = reelBoundaryObj.transform.position.y + cameraHalfHeight - 2;
+        float reelBoundaryBuffer = reelBoundary + 1;
+
+        bool initialYPos = false;
+        if (initialYPos == false)
+        {
+            newYPos = this.transform.position.y;
+            initialYPos = true;
+        }
+        
+        if (isReeling == true)
+        {
+            cameraIncrement = reelingCamInc;
+            //both the camera and frogPosSnap move down by the cameraIncrement
+            newYPos -= cameraIncrement;
+
+            currentPosition = Vector3.Lerp(this.transform.position,
+                new Vector3(
+                    this.transform.position.x,
+                    Mathf.Clamp(newYPos, reelBoundaryBuffer, this.transform.position.y),
+                    this.transform.position.z),
+                smoothSpeed);
+
+            this.transform.position = currentPosition;
+        }
+    }
+
+    public void ReachSurface()
+    {
+        
+        float startingPoint = surfaceBoundaryObj.transform.position.y;
+        float startingPointBuffer = startingPoint + 1;
+
+        if (reachedSurface == true)
+        {
+
+            newYPos += cameraIncrement;
+
+            currentPosition = Vector3.Lerp(this.transform.position,
+                new Vector3(
+                    this.transform.position.x,
+                    Mathf.Clamp(newYPos, this.transform.position.y, startingPointBuffer),
+                    this.transform.position.z),
+                smoothSpeed);
+
+            //currentPosition = new Vector3(this.transform.position.x, newYPos, this.transform.position.z);
+
+            this.transform.position = currentPosition;
+        }
+
+        if (this.transform.position.y >= startingPoint)
+        {
+            reachedSurface = false;
+        }
 
     }
 }
