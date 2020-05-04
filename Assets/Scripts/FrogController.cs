@@ -100,7 +100,7 @@ public class FrogController : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         //What to do when frog hits enemy
         if (collision.gameObject.tag == "Enemy")
