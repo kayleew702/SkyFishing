@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6589129183427497765}
   - component: {fileID: 7602759438765013235}
   - component: {fileID: 5327477443633472476}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: jellyfish
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

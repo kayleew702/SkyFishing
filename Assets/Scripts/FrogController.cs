@@ -27,15 +27,12 @@ public class FrogController : MonoBehaviour
     public float newYPos;
     public float yPosIncrement = .01f;
 
-
-    public Transform startPos;
-
     Animator animator;
 
-    public bool reachedReelPos = false;
-    public bool isReeling = false;
-    public bool isDiving = false;
-    public bool reachedSurface = false;
+    public bool reachedReelPos;
+    public bool isReeling;
+    public bool isDiving;
+    public bool reachedSurface;
 
     public int currentDepth;
 
@@ -108,8 +105,10 @@ public class FrogController : MonoBehaviour
         //What to do when frog hits enemy
         if (collision.gameObject.tag == "Enemy")
         {
+
             //resets fishCollected variable to 0 inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected = 0;
+            FishCollected = 0;
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
 
@@ -123,8 +122,11 @@ public class FrogController : MonoBehaviour
         //what to do if frog hits fish
         if (collision.gameObject.tag == "Fish")
         {
+
+            GameObject.Destroy(collision.gameObject);
             //adds 1 to the fishCollected variable inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected += 1;
+            FishCollected += 1;
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
 
