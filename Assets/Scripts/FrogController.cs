@@ -122,13 +122,14 @@ public class FrogController : MonoBehaviour
         //what to do if frog hits fish
         if (collision.gameObject.tag == "Fish")
         {
-
+            FishCollected += 1;
             GameObject.Destroy(collision.gameObject);
             //adds 1 to the fishCollected variable inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected += 1;
-            FishCollected += 1;
+            
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
+            GameObject.Destroy(collision.gameObject);
 
             if (isReeling == false)
             {
