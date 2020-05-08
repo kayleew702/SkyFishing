@@ -105,7 +105,7 @@ public class FrogController : MonoBehaviour
         //What to do when frog hits enemy
         if (collision.gameObject.tag == "Enemy")
         {
-
+            GameObject.Destroy(collision.gameObject);
             //resets fishCollected variable to 0 inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected = 0;
             FishCollected = 0;
@@ -188,7 +188,7 @@ public class FrogController : MonoBehaviour
             reachedSurface = true;
         }
 
-        //when the depth meter reaches 0, isReeling = false
+        //when the depth meter reaches 0, frogIsReeling = false
         //and the score is displayed
     }
 

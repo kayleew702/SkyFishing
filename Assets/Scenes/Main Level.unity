@@ -510,7 +510,7 @@ MonoBehaviour:
   movingDown: 0
   currentPosition: {x: 0, y: 0, z: 0}
   newYPos: 0
-  frogPlayer: {fileID: 0}
+  frogPlayer: {fileID: 556242320}
   reelBoundaryObj: {fileID: 1532069084}
   diveBoundaryObj: {fileID: 48230586}
   surfaceBoundaryObj: {fileID: 1471725769}
