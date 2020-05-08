@@ -44,11 +44,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: 6ae1086baaea00f4ba98a9b8fd2c867e, type: 3}
         m_Scale: {x: 1, y: 1}
 <<<<<<< HEAD
-<<<<<<< HEAD
         m_Offset: {x: 0, y: 0.016697884}
-=======
-        m_Offset: {x: 0, y: 0}
->>>>>>> 33b1cf0db3564823e5c2af7a3c4bad80933c1b0e
 =======
         m_Offset: {x: 0, y: 0}
 >>>>>>> 33b1cf0db3564823e5c2af7a3c4bad80933c1b0e
