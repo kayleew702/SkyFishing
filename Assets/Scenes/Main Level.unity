@@ -307,7 +307,10 @@ MonoBehaviour:
   spawnX: 0
   jellyfishEnemy: {fileID: 6589129183427497764, guid: c55e8c64813db7845882b82e6e42fd77,
     type: 3}
-  spawning: no
+  spawningDown: no
+  spawningUp: no
+  isReeling: 0
+  reelPosition: {fileID: 1532069084}
   timerMin: 5
   timerMax: 12
 --- !u!4 &174449275
@@ -449,7 +452,10 @@ MonoBehaviour:
   spawnY: 0
   fishCollectible: {fileID: 2800891185800818546, guid: 62c314a3aeb05494dae1b5de9f8f2e3b,
     type: 3}
-  spawning: no
+  spawningDown: no
+  spawningUp: no
+  isReeling: 0
+  reelPosition: {fileID: 1532069084}
   timerMin: 5
   timerMax: 12
 --- !u!4 &457001418
@@ -516,7 +522,7 @@ MonoBehaviour:
   surfaceBoundaryObj: {fileID: 1471725769}
   startingPoint: 0
   diveBoundary: 0
-  isReeling: 0
+  frogIsReeling: 0
   reachedSurface: 0
 --- !u!20 &519420031
 Camera:
@@ -1332,6 +1338,7 @@ GameObject:
   - component: {fileID: 1166703190}
   - component: {fileID: 1166703192}
   - component: {fileID: 1166703191}
+  - component: {fileID: 1166703193}
   m_Layer: 5
   m_Name: HighScoreText
   m_TagString: Untagged
@@ -1400,6 +1407,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166703189}
   m_CullTransparentMesh: 0
+--- !u!114 &1166703193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166703189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25c558db10435e4b9168b6b781f2074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScore: 0
+  highScoreText: {fileID: 1166703191}
 --- !u!1 &1471725769
 GameObject:
   m_ObjectHideFlags: 0

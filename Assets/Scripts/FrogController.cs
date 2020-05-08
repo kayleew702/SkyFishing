@@ -38,6 +38,7 @@ public class FrogController : MonoBehaviour
 
     //Gives access to fish collected text in UI
     private Text fishCollectedText;
+    private Text highScoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -111,6 +112,7 @@ public class FrogController : MonoBehaviour
             FishCollected = 0;
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
+            highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
 
             if (isReeling == false)
             {
@@ -126,7 +128,7 @@ public class FrogController : MonoBehaviour
             GameObject.Destroy(collision.gameObject);
             //adds 1 to the fishCollected variable inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected += 1;
-            
+
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
             GameObject.Destroy(collision.gameObject);

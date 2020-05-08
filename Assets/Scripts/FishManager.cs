@@ -43,12 +43,12 @@ public class FishManager : MonoBehaviour
         }
 
         //if the frog is reeling, stop spawning fish from bottom and start spawning them from top
-        //if (reelPosition && isReeling == true)
-        //{
-        //    StopCoroutine(SpawnFishTimer());
-        //    spawningDown = "yes";
-        //    StartCoroutine(SpawnFishReelTimer());
-        //}
+        if (reelPosition && isReeling == true)
+        {
+            StopCoroutine(SpawnFishTimer());
+            spawningDown = "yes";
+            StartCoroutine(SpawnFishReelTimer());
+        }
     }
 
     //Timer for how long an enemy will spawn

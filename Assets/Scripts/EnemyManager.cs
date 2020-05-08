@@ -43,12 +43,12 @@ public class EnemyManager : MonoBehaviour
         }
 
         //if reeling, stop spawning enemy from bottom and start spawning from top
-        //if (reelPosition && isReeling == true)
-        //{
-        //    StopCoroutine(SpawnEnemyTimer());
-        //    spawningDown = "yes";
-        //    StartCoroutine(SpawnEnemyReelTimer());
-        //}
+        if (reelPosition && isReeling == true)
+        {
+            StopCoroutine(SpawnEnemyTimer());
+            spawningDown = "yes";
+            StartCoroutine(SpawnEnemyReelTimer());
+        }
     }
 
     //Timer for how long an enemy will spawn
