@@ -10,7 +10,10 @@ public class FishManager : MonoBehaviour
 
     public int spawnY = 0;
     public Transform fishCollectible;
-    public string spawning = "no";
+    public string spawningDown = "no";
+    public string spawningUp = "no";
+    public bool isReeling = false;
+    public GameObject reelPosition;
 
     public float timerMin = 5f;
     public float timerMax = 12f;
@@ -32,10 +35,19 @@ public class FishManager : MonoBehaviour
     {
         spawnY = Random.Range(-4, 4);
         //Debug.Log(spawnY);
-        if (spawning == "no")
+        if (spawningUp == "no")
         {
-            spawning = "yes";
+            spawningUp = "yes";
             StartCoroutine(SpawnFishTimer());
+            isReeling = false;
+        }
+
+        //if the frog is reeling, stop spawning fish from bottom and start spawning them from top
+        if (reelPosition && isReeling == true)
+        {
+            StopCoroutine(SpawnFishTimer());
+            spawningDown = "yes";
+            StartCoroutine(SpawnFishReelTimer());
         }
     }
 
@@ -46,6 +58,15 @@ public class FishManager : MonoBehaviour
         timer += 0.5f;
         yield return new WaitForSeconds(maxTimer);
         Instantiate(fishCollectible, new Vector2(spawnY, -18), fishCollectible.rotation);
-        spawning = "no";
+        spawningUp = "no";
+    }
+
+    IEnumerator SpawnFishReelTimer()
+    {
+        maxTimer = Random.Range(timerMin, timerMax);
+        timer += 0.2f;
+        yield return new WaitForSeconds(maxTimer);
+        Instantiate(fishCollectible, new Vector2(spawnY, 0), fishCollectible.rotation);
+        spawningUp = "yes";
     }
 }

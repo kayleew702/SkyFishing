@@ -10,7 +10,10 @@ public class EnemyManager : MonoBehaviour
 
     public int spawnX = 0;
     public Transform jellyfishEnemy;
-    public string spawning = "no";
+    public string spawningDown = "no";
+    public string spawningUp = "no";
+    public bool isReeling = false;
+    public GameObject reelPosition;
 
     public float timerMin = 5f;
     public float timerMax = 12f;
@@ -32,10 +35,19 @@ public class EnemyManager : MonoBehaviour
     {
         spawnX = Random.Range(-4, 4);
         //Debug.Log(spawnX);
-        if (spawning == "no")
+        if (spawningUp == "no")
         {
-            spawning = "yes";
+            spawningUp = "yes";
             StartCoroutine(SpawnEnemyTimer());
+            isReeling = false;
+        }
+
+        //if reeling, stop spawning enemy from bottom and start spawning from top
+        if (reelPosition && isReeling == true)
+        {
+            StopCoroutine(SpawnEnemyTimer());
+            spawningDown = "yes";
+            StartCoroutine(SpawnEnemyReelTimer());
         }
     }
 
@@ -46,9 +58,18 @@ public class EnemyManager : MonoBehaviour
             timer += 0.2f;
             yield return new WaitForSeconds(maxTimer);
             Instantiate(jellyfishEnemy, new Vector2(spawnX, -18), jellyfishEnemy.rotation);
-            spawning = "no";
-        }
+            spawningUp = "no";
     }
+
+    IEnumerator SpawnEnemyReelTimer()
+    {
+        maxTimer = Random.Range(timerMin, timerMax);
+        timer += 0.2f;
+        yield return new WaitForSeconds(maxTimer);
+        Instantiate(jellyfishEnemy, new Vector2(spawnX, 0), jellyfishEnemy.rotation);
+        spawningDown = "no";
+    }
+}
 
 
 
