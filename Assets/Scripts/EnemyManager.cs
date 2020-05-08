@@ -10,10 +10,9 @@ public class EnemyManager : MonoBehaviour
 
     public int spawnX = 0;
     public Transform jellyfishEnemy;
-    public string spawningDown = "no";
-    public string spawningUp = "no";
-    public bool isReeling = false;
-    public GameObject reelPosition;
+    public bool spawning = false;
+    public bool isReeling = GameObject.Find("frog").GetComponent<FrogController>().isReeling;
+    public float speed = GameObject.Find("Enemy").GetComponent<EnemyController>().speed;
 
     public float timerMin = 5f;
     public float timerMax = 12f;
@@ -26,27 +25,22 @@ public class EnemyManager : MonoBehaviour
         maxTimer = Random.Range(timerMin, timerMax);
 
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-
-        StartCoroutine("SpawnEnemyTimer");
-
     }
 
     private void Update()
     {
         spawnX = Random.Range(-4, 4);
         //Debug.Log(spawnX);
-        if (spawningUp == "no")
+        if (spawning == false && isReeling == false)
         {
-            spawningUp = "yes";
+            spawning = true;
             StartCoroutine(SpawnEnemyTimer());
-            isReeling = false;
         }
-
         //if reeling, stop spawning enemy from bottom and start spawning from top
-        if (reelPosition && isReeling == true)
+        if (spawning == false && isReeling == true)
         {
+            spawning = true;
             StopCoroutine(SpawnEnemyTimer());
-            spawningDown = "yes";
             StartCoroutine(SpawnEnemyReelTimer());
         }
     }
@@ -54,20 +48,22 @@ public class EnemyManager : MonoBehaviour
     //Timer for how long an enemy will spawn
     IEnumerator SpawnEnemyTimer()
     {
-            maxTimer = Random.Range(timerMin, timerMax);
-            timer += 0.2f;
-            yield return new WaitForSeconds(maxTimer);
-            Instantiate(jellyfishEnemy, new Vector2(spawnX, -18), jellyfishEnemy.rotation);
-            spawningUp = "no";
+        speed = 4f;
+        maxTimer = Random.Range(timerMin, timerMax);
+        timer += 0.2f;
+        yield return new WaitForSeconds(maxTimer);
+        Instantiate(jellyfishEnemy, new Vector2(spawnX, -18), jellyfishEnemy.rotation);
+        spawning = false;
     }
 
     IEnumerator SpawnEnemyReelTimer()
     {
+        speed = -4f;
         maxTimer = Random.Range(timerMin, timerMax);
         timer += 0.2f;
         yield return new WaitForSeconds(maxTimer);
         Instantiate(jellyfishEnemy, new Vector2(spawnX, 0), jellyfishEnemy.rotation);
-        spawningDown = "no";
+        spawning = false;
     }
 }
 

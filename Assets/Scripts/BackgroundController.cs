@@ -9,6 +9,10 @@ public class BackgroundController : MonoBehaviour
     private Renderer renderer;
     private Vector2 savedOffset;
 
+    public GameObject frogPlayer;
+    public bool frogIsReeling;
+    public bool reachedSurface;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,4 +27,5 @@ public class BackgroundController : MonoBehaviour
         Vector2 offset = new Vector2(0, y);
         renderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
     }
+
 }

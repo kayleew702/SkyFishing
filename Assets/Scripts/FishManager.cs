@@ -10,10 +10,9 @@ public class FishManager : MonoBehaviour
 
     public int spawnY = 0;
     public Transform fishCollectible;
-    public string spawningDown = "no";
-    public string spawningUp = "no";
-    public bool isReeling = false;
-    public GameObject reelPosition;
+    public bool spawning = false;
+    public bool isReeling = GameObject.Find("frog").GetComponent<FrogController>().isReeling;
+    public float speed = GameObject.Find("Fish").GetComponent<FishController>().speed;
 
     public float timerMin = 5f;
     public float timerMax = 12f;
@@ -27,26 +26,22 @@ public class FishManager : MonoBehaviour
 
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
-        StartCoroutine("SpawnFishTimer");
-
     }
 
     private void Update()
     {
         spawnY = Random.Range(-4, 4);
         //Debug.Log(spawnY);
-        if (spawningUp == "no")
+        if (spawning == false && isReeling == false)
         {
-            spawningUp = "yes";
+            spawning = true;
             StartCoroutine(SpawnFishTimer());
-            isReeling = false;
         }
-
-        //if the frog is reeling, stop spawning fish from bottom and start spawning them from top
-        if (reelPosition && isReeling == true)
+            //if the frog is reeling, stop spawning fish from bottom and start spawning them from top
+        if (spawning == false && isReeling == true)
         {
+            spawning = true;
             StopCoroutine(SpawnFishTimer());
-            spawningDown = "yes";
             StartCoroutine(SpawnFishReelTimer());
         }
     }
@@ -54,19 +49,21 @@ public class FishManager : MonoBehaviour
     //Timer for how long an enemy will spawn
     IEnumerator SpawnFishTimer()
     {
+        speed = 5f;
         maxTimer = Random.Range(timerMin, timerMax);
         timer += 0.5f;
         yield return new WaitForSeconds(maxTimer);
         Instantiate(fishCollectible, new Vector2(spawnY, -18), fishCollectible.rotation);
-        spawningUp = "no";
+        spawning = false;
     }
 
     IEnumerator SpawnFishReelTimer()
     {
+        speed = -5f;
         maxTimer = Random.Range(timerMin, timerMax);
-        timer += 0.2f;
+        timer += 0.5f;
         yield return new WaitForSeconds(maxTimer);
         Instantiate(fishCollectible, new Vector2(spawnY, 0), fishCollectible.rotation);
-        spawningUp = "yes";
+        spawning = false;
     }
 }
