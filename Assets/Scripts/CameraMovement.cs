@@ -25,7 +25,7 @@ public class CameraMovement : MonoBehaviour
     public float startingPoint;
     public float diveBoundary;
 
-    public bool isReeling;
+    public bool frogIsReeling;
     public bool reachedSurface;
 
 
@@ -45,7 +45,6 @@ public class CameraMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
         //borderTop and borderBottom variables will update
         //camera will move down if reachedEnd == false
         MoveDown();
@@ -53,14 +52,17 @@ public class CameraMovement : MonoBehaviour
         ReelingPos();
 
         ReachSurface();
+    }
 
+    void Update()
+    {
+        FrogBools();
     }
 
     public void FrogBools()
     {
         //gets bools from the Frog Controller script
-        frogPlayer = GameObject.Find("Frog");
-        isReeling = frogPlayer.GetComponent<FrogController>().isReeling;
+        frogIsReeling = frogPlayer.GetComponent<FrogController>().isReeling;
         reachedSurface = frogPlayer.GetComponent<FrogController>().reachedSurface;
     }
 
@@ -107,7 +109,7 @@ public class CameraMovement : MonoBehaviour
             initialYPos = true;
         }
         
-        if (isReeling == true)
+        if (frogIsReeling == true)
         {
             cameraIncrement = reelingCamInc;
             //both the camera and frogPosSnap move down by the cameraIncrement
