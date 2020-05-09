@@ -1346,6 +1346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1150072702}
+  - component: {fileID: 1150072703}
   m_Layer: 10
   m_Name: ScrollingWater
   m_TagString: Untagged
@@ -1370,6 +1371,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1150072703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150072701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd9a31d2b6fdcc4f829c04819fb3bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollingWater1: {fileID: 595470822}
+  scrollingWater2: {fileID: 805938653}
+  scrollingWater3: {fileID: 1773724997}
+  scrollingSpeed: 0.3
+  frogPlayer: {fileID: 556242320}
+  frogIsReeling: 0
+  frogReachedSurface: 0
+  scrollingWaterList: []
 --- !u!1 &1161790299
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,6 +2219,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752190194}
   m_CullTransparentMesh: 0
+--- !u!1 &1773724997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 404237764478526964, guid: f710b0fccb44948bab4432a8839f2681,
+    type: 3}
+  m_PrefabInstance: {fileID: 404237762851461725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1775741934
 GameObject:
   m_ObjectHideFlags: 0

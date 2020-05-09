@@ -197,12 +197,20 @@ public class FrogController : MonoBehaviour
         {
             isReeling = false;
             reachedSurface = true;
-            //SceneManager.LoadScene("Menu");
-            //Debug.Log("Startup Menu Loaded");
+            Invoke("LoadMenu", 4);
         }
 
         //when the depth meter reaches 0, frogIsReeling = false
         //and the score is displayed
+    }
+
+    public void LoadMenu()
+    {
+        if (isReeling == false && reachedSurface == true && currentDepth == 1)
+        {
+            SceneManager.LoadScene("Menu");
+            Debug.Log("Startup Menu Loaded");
+        }
     }
 
     public void StartPos()
