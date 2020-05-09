@@ -47,6 +47,7 @@ public class FrogController : MonoBehaviour
 
         //Gives access to fish collected text in UI
         fishCollectedText = GameObject.Find("FishCollectedText").GetComponent<Text>();
+        highScoreText = GameObject.Find("HighScoreText").GetComponent<Text>();
 
         isDiving = true;
     }
@@ -104,15 +105,16 @@ public class FrogController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //What to do when frog hits enemy
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            GameObject.Destroy(collision.gameObject);
             //resets fishCollected variable to 0 inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected = 0;
-            FishCollected = 0;
+
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
             highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
+            FishCollected = 0;
+            GameObject.Destroy(collision.gameObject);
 
             if (isReeling == false)
             {
@@ -122,10 +124,9 @@ public class FrogController : MonoBehaviour
         }
 
         //what to do if frog hits fish
-        if (collision.gameObject.tag == "Fish")
+        if (collision.gameObject.CompareTag("Fish"))
         {
             FishCollected += 1;
-            GameObject.Destroy(collision.gameObject);
             //adds 1 to the fishCollected variable inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected += 1;
 

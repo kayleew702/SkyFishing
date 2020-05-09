@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HighScoreController : MonoBehaviour
 {
 
-    public int highScore = 0;
+    public int highScore;
     private int fishCollected;
     public Text highScoreText;
     private Text fishCollectedText;
@@ -28,17 +28,17 @@ public class HighScoreController : MonoBehaviour
     // Update is called once per frame
     public void UpdateHighScore()
     {
-        fishCollectedText.GetComponent<FishCollectedController>().fishCollected = 0;
-        fishCollected = 0;
-        fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
+        fishCollected = GameObject.Find("frog").GetComponent<FrogController>().FishCollected;
 
         if (fishCollected > highScore)
         {
             highScore = fishCollected;
 
-            highScoreText.text = highScore.ToString();
+            highScoreText.text = "High Score:" + highScore.ToString();
 
             PlayerPrefs.SetInt("highScore", highScore);
         }
+
+        fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
     }
 }
