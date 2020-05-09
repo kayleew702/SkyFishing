@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2800891185800818547}
   - component: {fileID: 2800891185800818544}
   - component: {fileID: 2800891185800818545}
-  - component: {fileID: 1909635574046492345}
+  - component: {fileID: 4310904897352220926}
   m_Layer: 12
   m_Name: Fish
   m_TagString: Fish
@@ -130,7 +130,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1909635574046492345
+--- !u!114 &4310904897352220926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,3 +143,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
+  isReeling: 0
+  changedSpeed: 0

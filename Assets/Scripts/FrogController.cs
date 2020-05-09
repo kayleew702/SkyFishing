@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class FrogController : MonoBehaviour
 {
-    public float speed;
+    public float speed = 5;
     private float moveY;
     private float moveX;
 

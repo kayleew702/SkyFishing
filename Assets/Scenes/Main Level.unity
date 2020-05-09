@@ -482,14 +482,16 @@ MonoBehaviour:
   fishCollectible: {fileID: 2800891185800818546, guid: 62c314a3aeb05494dae1b5de9f8f2e3b,
     type: 3}
   spawning: 0
+  isDiving: 0
   isReeling: 0
   reachedSurface: 0
-  speed: 0
   frogPlayer: {fileID: 556242320}
-  timerMin: 5
-  timerMax: 12
+  timerMin: 0.5
+  timerMax: 1
   divingSpawnPoint: {fileID: 1605897296}
   reelingSpawnPoint: {fileID: 437972630}
+  spawningFromBottom: 0
+  spawningFromTop: 0
 --- !u!4 &457001418
 Transform:
   m_ObjectHideFlags: 0
@@ -1108,7 +1110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801497512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0044183, y: 0.08, z: 0}
+  m_LocalPosition: {x: -0, y: 0.08, z: 0}
   m_LocalScale: {x: 3.3302398, y: 3.3302398, z: 3.3302398}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1253,11 +1255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd9a31d2b6fdcc4f829c04819fb3bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollingWater1: {fileID: 0}
-  scrollingWater2: {fileID: 0}
-  scrollingWater3: {fileID: 0}
+  scrollingWater1: {fileID: 595470822}
+  scrollingWater2: {fileID: 1773724997}
+  scrollingWater3: {fileID: 805938653}
   scrollingSpeed: 0
-  frogPlayer: {fileID: 0}
+  frogPlayer: {fileID: 556242320}
   frogIsReeling: 0
   frogReachedSurface: 0
   scrollingWaterList: []
