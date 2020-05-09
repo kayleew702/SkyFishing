@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6589129183427497765}
   - component: {fileID: 7602759438765013235}
   - component: {fileID: 5327477443633472476}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: jellyfish
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ae56b597e9edc4bbfc81c56a5a170c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 0.05
 --- !u!58 &7602759438765013235
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: -0.025
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

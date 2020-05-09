@@ -589,6 +589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519654073}
   - component: {fileID: 519654075}
+  - component: {fileID: 519654076}
   - component: {fileID: 519654074}
   m_Layer: 5
   m_Name: CurrentScoreText
@@ -658,6 +659,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519654072}
   m_CullTransparentMesh: 0
+--- !u!114 &519654076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519654072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37c5b05890cc0243a17b7d0726033a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishCollected: 0
 --- !u!1 &556242320
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,6 +778,10 @@ MonoBehaviour:
   rightBoundary: {fileID: 1123809220}
   newYPos: 0
   yPosIncrement: 0.025
+  diveSound: {fileID: 8300000, guid: 174a82f7e0054974997d8fa52e670d86, type: 3}
+  reelSound: {fileID: 8300000, guid: 2e1f491046b031744a45d8b17cb03ee1, type: 3}
+  enemyHit: {fileID: 8300000, guid: 9d13aa15414ee9e488aa99fd37a1a5b7, type: 3}
+  collectFish: {fileID: 8300000, guid: 700d5a11aa037d8448b95ec2a73b2369, type: 3}
   reachedReelPos: 0
   isReeling: 0
   isDiving: 0
@@ -1201,11 +1219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd9a31d2b6fdcc4f829c04819fb3bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollingWater1: {fileID: 1803402931}
-  scrollingWater2: {fileID: 595470822}
-  scrollingWater3: {fileID: 805938653}
+  scrollingWater1: {fileID: 0}
+  scrollingWater2: {fileID: 0}
+  scrollingWater3: {fileID: 0}
   scrollingSpeed: 0
-  frogPlayer: {fileID: 556242320}
+  frogPlayer: {fileID: 0}
   frogIsReeling: 0
   frogReachedSurface: 0
   scrollingWaterList: []
@@ -1596,6 +1614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1597895345}
   - component: {fileID: 1597895347}
+  - component: {fileID: 1597895348}
   - component: {fileID: 1597895346}
   m_Layer: 5
   m_Name: HighScoreText
@@ -1665,6 +1684,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597895344}
   m_CullTransparentMesh: 0
+--- !u!114 &1597895348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597895344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25c558db10435e4b9168b6b781f2074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScore: 0
+  highScoreText: {fileID: 1166703191}
 --- !u!1 &1600736749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,12 +2228,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1803402931 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 404237764478526964, guid: f710b0fccb44948bab4432a8839f2681,
-    type: 3}
-  m_PrefabInstance: {fileID: 404237762851461725}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1841315504
 GameObject:
   m_ObjectHideFlags: 0

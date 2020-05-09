@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FrogController : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class FrogController : MonoBehaviour
     public float yPosIncrement = .01f;
 
     Animator animator;
+
+    public AudioClip diveSound;
+    public AudioClip reelSound;
+    public AudioClip enemyHit;
+    public AudioClip collectFish;
 
     public bool reachedReelPos;
     public bool isReeling;
@@ -107,6 +113,7 @@ public class FrogController : MonoBehaviour
         //What to do when frog hits enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            AudioSource.PlayClipAtPoint(enemyHit, transform.position);
             //resets fishCollected variable to 0 inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected = 0;
 
@@ -126,6 +133,7 @@ public class FrogController : MonoBehaviour
         //what to do if frog hits fish
         if (collision.gameObject.CompareTag("Fish"))
         {
+            AudioSource.PlayClipAtPoint(collectFish, transform.position);
             FishCollected += 1;
             //adds 1 to the fishCollected variable inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected += 1;
@@ -189,6 +197,8 @@ public class FrogController : MonoBehaviour
         {
             isReeling = false;
             reachedSurface = true;
+            //SceneManager.LoadScene("Menu");
+            //Debug.Log("Startup Menu Loaded");
         }
 
         //when the depth meter reaches 0, frogIsReeling = false
