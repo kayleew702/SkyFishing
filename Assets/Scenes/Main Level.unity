@@ -308,10 +308,16 @@ MonoBehaviour:
   jellyfishEnemy: {fileID: 6589129183427497764, guid: c55e8c64813db7845882b82e6e42fd77,
     type: 3}
   spawning: 0
+  isDiving: 0
   isReeling: 0
-  speed: 0
-  timerMin: 5
-  timerMax: 12
+  reachedSurface: 0
+  frogPlayer: {fileID: 556242320}
+  timerMin: 1
+  timerMax: 3
+  divingSpawnPoint: {fileID: 1605897296}
+  reelingSpawnPoint: {fileID: 437972630}
+  spawningFromBottom: 0
+  spawningFromTop: 0
 --- !u!4 &174449275
 Transform:
   m_ObjectHideFlags: 0

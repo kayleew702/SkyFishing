@@ -205,7 +205,7 @@ public class FrogController : MonoBehaviour
         {
             isReeling = false;
             reachedSurface = true;
-            Invoke("LoadMenu", 4);
+            Invoke("LoadMenu", 5f);
         }
 
         //when the depth meter reaches 0, frogIsReeling = false
