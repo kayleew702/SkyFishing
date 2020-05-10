@@ -18,6 +18,7 @@ public class FrogController : MonoBehaviour
     private float smoothSpeed = 0.01f;
 
     public Vector3 currentPosition;
+    private Vector3 frogSize;
 
     public GameObject startPosition;
     public GameObject divingPosition;
@@ -26,7 +27,7 @@ public class FrogController : MonoBehaviour
     public GameObject rightBoundary;
 
     public float newYPos;
-    public float yPosIncrement = .01f;
+    public float yPosIncrement = .03f;
 
     Animator animator;
 
@@ -100,7 +101,14 @@ public class FrogController : MonoBehaviour
         float leftBorder = leftBoundary.transform.position.x;
         float rightBorder = rightBoundary.transform.position.x;
 
-        Vector3 frogSize = GetComponent<Renderer>().bounds.size;
+        if (isDiving == true)
+        {
+            frogSize = this.GetComponent<frogSpriteController>().frogDiveSprite.bounds.size;
+        }
+        else if (isReeling == true)
+        {
+            frogSize = this.GetComponent<frogSpriteController>().frogReelSprite.bounds.size;
+        }
 
         this.transform.position = new Vector3(Mathf.Clamp
             (this.transform.position.x, leftBorder + frogSize.x / 2, rightBorder - 1 - frogSize.x / 2),
@@ -166,14 +174,14 @@ public class FrogController : MonoBehaviour
             }
             newYPos -= yPosIncrement;
 
-            //currentPosition = Vector3.Lerp(this.transform.position,
-            //new Vector3(
-            //this.transform.position.x,
-            //Mathf.Clamp(newYPos, this.transform.position.y, reelingPositionBuffer),
-            // this.transform.position.z),
-            //  smoothSpeed);
+            currentPosition = Vector3.Lerp(this.transform.position,
+            new Vector3(
+                this.transform.position.x,
+                Mathf.Clamp(newYPos, this.transform.position.y, reelingPositionBuffer),
+                this.transform.position.z),
+            smoothSpeed);
 
-            currentPosition = new Vector3(this.transform.position.x, newYPos, this.transform.position.z);
+            //currentPosition = new Vector3(this.transform.position.x, newYPos, this.transform.position.z);
 
             this.transform.position = currentPosition;
         }
@@ -237,7 +245,7 @@ public class FrogController : MonoBehaviour
         isDiving = true;
 
         float divingPositionY = divingPosition.transform.position.y;
-        float divingPositionBuffer = divingPositionY - 1;
+        float divingPositionBuffer = divingPositionY - 2;
 
         if (isDiving == true)
         {
