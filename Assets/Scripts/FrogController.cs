@@ -163,6 +163,8 @@ public class FrogController : MonoBehaviour
     {
         //move to reel position
 
+        AudioSource.PlayClipAtPoint(reelSound, transform.position);
+
         float reelingPositionY = reelingPosition.transform.position.y;
         float reelingPositionBuffer = reelingPositionY - 1;
 
@@ -196,7 +198,7 @@ public class FrogController : MonoBehaviour
 
     public void Reel()
     {
-
+        
         ReelPosition();
 
         currentDepth = GameObject.Find("DepthMeter").GetComponent<DepthController>().currentDepth;
@@ -246,6 +248,8 @@ public class FrogController : MonoBehaviour
 
         float divingPositionY = divingPosition.transform.position.y;
         float divingPositionBuffer = divingPositionY - 2;
+
+        AudioSource.PlayClipAtPoint(diveSound, transform.position);
 
         if (isDiving == true)
         {
