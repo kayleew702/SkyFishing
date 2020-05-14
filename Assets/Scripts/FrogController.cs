@@ -26,6 +26,8 @@ public class FrogController : MonoBehaviour
     public GameObject leftBoundary;
     public GameObject rightBoundary;
 
+    private GameObject endScore;
+
     public float newYPos;
     public float yPosIncrement = .03f;
 
@@ -55,6 +57,8 @@ public class FrogController : MonoBehaviour
         //Gives access to fish collected text in UI
         fishCollectedText = GameObject.Find("FishCollectedText").GetComponent<Text>();
         highScoreText = GameObject.Find("HighScoreText").GetComponent<Text>();
+        endScore = GameObject.Find("BigScore");
+        endScore.SetActive(false);
 
         isDiving = true;
     }
@@ -207,11 +211,18 @@ public class FrogController : MonoBehaviour
         {
             isReeling = false;
             reachedSurface = true;
+            Invoke("EndScore", 2f);
             Invoke("LoadMenu", 5f);
         }
 
         //when the depth meter reaches 0, frogIsReeling = false
         //and the score is displayed
+    }
+
+    public void EndScore()
+    {
+        endScore.SetActive(true);
+        endScore.GetComponent<BigScoreScript>().ShowScore();
     }
 
     public void LoadMenu()
