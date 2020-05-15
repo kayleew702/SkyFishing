@@ -802,7 +802,7 @@ MonoBehaviour:
   collectFish: {fileID: 8300000, guid: 700d5a11aa037d8448b95ec2a73b2369, type: 3}
   reachedReelPos: 0
   isReeling: 0
-  isDiving: 0
+  isDiving: 1
   reachedSurface: 0
   currentDepth: 0
 --- !u!50 &556242324

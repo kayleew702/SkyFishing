@@ -69,6 +69,8 @@ public class FrogController : MonoBehaviour
     void Update()
     {
 
+
+
         Move();
         BoundMovement();
 
@@ -230,11 +232,13 @@ public class FrogController : MonoBehaviour
 
         if ((reachedReelPos == false) && (isReeling == true))
         {
+            newYPos -= yPosIncrement;
+
             if (newYPos < this.transform.position.y)
             {
                 newYPos = this.transform.position.y;
             }
-            newYPos -= yPosIncrement;
+            
 
             currentPosition = Vector3.Lerp(this.transform.position,
             new Vector3(
