@@ -119,6 +119,18 @@ public class FrogController : MonoBehaviour
             animator.SetBool("SwimLeft", false);
             animator.SetBool("SwimRight", false);
         }
+
+        if (animator.GetBool("HitEnemy"))
+        {
+            animator.SetBool("SwimLeft", false);
+            animator.SetBool("SwimRight", false);
+        }
+
+        if (animator.GetBool("HitFish"))
+        {
+            animator.SetBool("SwimLeft", false);
+            animator.SetBool("SwimRight", false);
+        }
         
 
         rb.velocity = new Vector2(moveX, 0);
