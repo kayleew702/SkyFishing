@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class FrogController : MonoBehaviour
 {
     public float speed = 5;
-    private float moveY;
-    private float moveX;
+    //private float moveY;
+    public float moveX;
 
     private Rigidbody2D rb;
 
@@ -31,7 +31,7 @@ public class FrogController : MonoBehaviour
     public float newYPos;
     public float yPosIncrement = .03f;
 
-    Animator animator;
+    public Animator animator;
 
     public AudioClip diveSound;
     public AudioClip reelSound;
@@ -61,6 +61,8 @@ public class FrogController : MonoBehaviour
         endScore.SetActive(false);
 
         isDiving = true;
+        animator.SetBool("IsDive", true);
+        animator.SetBool("IsReel", false);
     }
 
     // Update is called once per frame
@@ -73,11 +75,21 @@ public class FrogController : MonoBehaviour
         //frog begins diving at the beginning of the level
         Dive();
 
-        //frog is reeled in when it collides with an enemy or a fish
         Reel();
 
         //after reeling and the depth meter is 0, the frog will return to the start position
         StartPos();
+
+        if (isReeling == true)
+        {
+            animator.SetBool("IsReel", true);
+            animator.SetBool("IsDive", false);
+        }
+        else
+        {
+            animator.SetBool("IsDive", true);
+            animator.SetBool("IsReel", false);
+        }
 
 
     }
@@ -89,6 +101,23 @@ public class FrogController : MonoBehaviour
 
         moveX = x * speed;
         //moveY = y * speed;
+
+        if (moveX > 0)
+        {
+            animator.SetBool("SwimRight", true);
+            animator.SetBool("SwimLeft", false);
+        }
+        else if (moveX < 0)
+        {
+            animator.SetBool("SwimLeft", true);
+            animator.SetBool("SwimRight", false);
+        }
+        else
+        {
+            animator.SetBool("SwimLeft", false);
+            animator.SetBool("SwimRight", false);
+        }
+        
 
         rb.velocity = new Vector2(moveX, 0);
     }
@@ -125,6 +154,15 @@ public class FrogController : MonoBehaviour
         //What to do when frog hits enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if (animator.GetBool("HitFish"))
+            {
+                animator.SetBool("HitEnemy", false);
+            }
+            else
+            {
+                animator.SetBool("HitEnemy", true);
+            }
+
             AudioSource.PlayClipAtPoint(enemyHit, transform.position);
             //resets fishCollected variable to 0 inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected = 0;
@@ -134,6 +172,7 @@ public class FrogController : MonoBehaviour
             highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
             FishCollected = 0;
             GameObject.Destroy(collision.gameObject);
+            Invoke("ResetBools", 2f);
 
             if (isReeling == false)
             {
@@ -145,6 +184,16 @@ public class FrogController : MonoBehaviour
         //what to do if frog hits fish
         if (collision.gameObject.CompareTag("Fish"))
         {
+
+            if (animator.GetBool("HitEnemy"))
+            {
+                animator.SetBool("HitFish", false);
+            }
+            else
+            {
+                animator.SetBool("HitFish", true);
+            }
+
             AudioSource.PlayClipAtPoint(collectFish, transform.position);
             FishCollected += 1;
             //adds 1 to the fishCollected variable inside the FishCollectedController script, which is attached to the fishCollectedText game object
@@ -153,6 +202,7 @@ public class FrogController : MonoBehaviour
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
             GameObject.Destroy(collision.gameObject);
+            Invoke("ResetBools", 1f);
 
             if (isReeling == false)
             {
@@ -161,6 +211,12 @@ public class FrogController : MonoBehaviour
             }
 
         }
+    }
+
+    public void ResetBools()
+    {
+        animator.SetBool("HitFish", false);
+        animator.SetBool("HitEnemy", false);
     }
 
     public void ReelPosition()
