@@ -33,7 +33,7 @@ public class FrogController : MonoBehaviour
 
     public Animator animator;
 
-    public AudioClip diveSound;
+    public AudioSource diveSound;
     public AudioClip reelSound;
     public AudioClip enemyHit;
     public AudioClip collectFish;
@@ -63,13 +63,12 @@ public class FrogController : MonoBehaviour
         isDiving = true;
         animator.SetBool("IsDive", true);
         animator.SetBool("IsReel", false);
+        diveSound.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
 
         Move();
         BoundMovement();
@@ -86,12 +85,14 @@ public class FrogController : MonoBehaviour
         {
             animator.SetBool("IsReel", true);
             animator.SetBool("IsDive", false);
+            AudioSource.PlayClipAtPoint(reelSound, this.transform.position);
         }
         else
         {
             animator.SetBool("IsDive", true);
             animator.SetBool("IsReel", false);
         }
+
 
 
     }
@@ -237,13 +238,12 @@ public class FrogController : MonoBehaviour
     {
         //move to reel position
 
-        AudioSource.PlayClipAtPoint(reelSound, transform.position);
-
         float reelingPositionY = reelingPosition.transform.position.y;
         float reelingPositionBuffer = reelingPositionY - 1;
 
         if ((reachedReelPos == false) && (isReeling == true))
         {
+
             newYPos -= yPosIncrement;
 
             if (newYPos < this.transform.position.y)
@@ -332,10 +332,9 @@ public class FrogController : MonoBehaviour
         float divingPositionY = divingPosition.transform.position.y;
         float divingPositionBuffer = divingPositionY - 2;
 
-        AudioSource.PlayClipAtPoint(diveSound, transform.position);
-
         if (isDiving == true)
         {
+
             newYPos -= yPosIncrement;
 
             currentPosition = Vector3.Lerp(this.transform.position,
