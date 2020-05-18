@@ -35,6 +35,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void Reload()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
     public void ActivateMenu()
