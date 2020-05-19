@@ -976,7 +976,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519654073}
   - component: {fileID: 519654075}
-  - component: {fileID: 519654076}
   - component: {fileID: 519654074}
   m_Layer: 5
   m_Name: CurrentScoreText
@@ -1037,7 +1036,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Current Score: 0'
+  m_Text: 'Fish Collected: 0'
 --- !u!222 &519654075
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1046,19 +1045,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519654072}
   m_CullTransparentMesh: 0
---- !u!114 &519654076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519654072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37c5b05890cc0243a17b7d0726033a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishCollected: 0
 --- !u!1 &556242320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,10 +2606,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1597895345}
   - component: {fileID: 1597895347}
-  - component: {fileID: 1597895348}
   - component: {fileID: 1597895346}
   m_Layer: 5
-  m_Name: HighScoreText
+  m_Name: CurrentHighScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2690,20 +2675,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597895344}
   m_CullTransparentMesh: 0
---- !u!114 &1597895348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1597895344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25c558db10435e4b9168b6b781f2074, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highScore: 0
-  highScoreText: {fileID: 1166703191}
 --- !u!1 &1605897296
 GameObject:
   m_ObjectHideFlags: 0

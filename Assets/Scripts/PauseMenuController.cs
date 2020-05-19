@@ -1,12 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
     GameObject[] pauseObjects;
+    private int currentScore;
+    private int currenthighScore;
+    private Text currentScoreText;
+    private Text currenthighScoreText;
+
+    void UpdateScore()
+    {
+        GetScore();
+        currenthighScoreText.text = "High Score: " + currenthighScore;
+        currentScoreText.text = "Fish Collected: " + currentScore;
+    }
+
+    void GetScore()
+    {
+        currentScore = GameObject.Find("FishCollectedText").GetComponent<FishCollectedController>().fishCollected;
+        currenthighScore = GameObject.Find("HighScoreText").GetComponent<HighScoreController>().highScore;
+        currentScoreText = GameObject.Find("CurrentScoreText").GetComponent<Text>();
+        currenthighScoreText = GameObject.Find("CurrentHighScoreText").GetComponent<Text>();
+    }
 
     void Start()
     {
@@ -43,6 +63,7 @@ public class PauseMenuController : MonoBehaviour
         foreach (GameObject g in pauseObjects)
         {
             g.SetActive(true);
+            UpdateScore();
         }
     }
 
