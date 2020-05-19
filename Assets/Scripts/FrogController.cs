@@ -283,6 +283,7 @@ public class FrogController : MonoBehaviour
         {
             isReeling = false;
             reachedSurface = true;
+            highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
             Invoke("EndScore", 2f);
             Invoke("LoadMenu", 5f);
         }
