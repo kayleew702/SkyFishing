@@ -257,6 +257,7 @@ public class FrogController : MonoBehaviour
 
     public void ReelPosition()
     {
+
         
 
         //move to reel position
@@ -267,7 +268,7 @@ public class FrogController : MonoBehaviour
         float reelingPositionY = reelingPosition.transform.position.y;
         float reelingPositionBuffer = reelingPositionY - 1;
 
-        if ((reachedReelPos == false) && (isReeling == true) && (pauseMenu == false))
+        if ((pauseMenu == false) && (reachedReelPos == false) && (isReeling == true))
         {
 
             newYPos -= yPosIncrement;
