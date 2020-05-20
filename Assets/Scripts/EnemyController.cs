@@ -8,9 +8,11 @@ public class EnemyController : MonoBehaviour
     public float upSpeed = 1.5f;
     private Rigidbody2D rb;
 
+
     public bool isReeling;
     public bool changedSpeed = false;
     
+
     // Start is called before the first frame update
     void Start()
     {

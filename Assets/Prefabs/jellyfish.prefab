@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downSpeed: -2
   upSpeed: 2
+  enemyHit: {fileID: 8300000, guid: 734bb50db2f09384f85924d344126c61, type: 3}
   isReeling: 0
   changedSpeed: 0
 --- !u!58 &7602759438765013235

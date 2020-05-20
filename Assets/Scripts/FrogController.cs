@@ -38,8 +38,8 @@ public class FrogController : MonoBehaviour
 
     public AudioSource diveSound;
     public AudioClip reelSound;
-    public AudioClip enemyHit;
-    public AudioClip collectFish;
+    public AudioSource enemyHit;
+    public AudioSource collectFish;
 
     public bool reachedReelPos;
     public bool isReeling;
@@ -185,7 +185,7 @@ public class FrogController : MonoBehaviour
                 animator.SetBool("HitEnemy", true);
             }
 
-            AudioSource.PlayClipAtPoint(enemyHit, transform.position);
+            enemyHit.Play();
             //resets fishCollected variable to 0 inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected = 0;
 
@@ -216,7 +216,7 @@ public class FrogController : MonoBehaviour
                 animator.SetBool("HitFish", true);
             }
 
-            AudioSource.PlayClipAtPoint(collectFish, transform.position);
+            collectFish.Play();
             FishCollected += 1;
             //adds 1 to the fishCollected variable inside the FishCollectedController script, which is attached to the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().fishCollected += 1;
