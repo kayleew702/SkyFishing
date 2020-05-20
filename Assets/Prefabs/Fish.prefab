@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downSpeed: -8
   upSpeed: 1.5
+  collectFish: {fileID: 8300000, guid: 700d5a11aa037d8448b95ec2a73b2369, type: 3}
   isReeling: 0
   changedSpeed: 0
 --- !u!95 &7414035856248410245
