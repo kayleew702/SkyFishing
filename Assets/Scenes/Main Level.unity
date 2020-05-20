@@ -1061,6 +1061,7 @@ GameObject:
   - component: {fileID: 556242321}
   - component: {fileID: 556242327}
   - component: {fileID: 556242329}
+  - component: {fileID: 556242328}
   m_Layer: 11
   m_Name: frog
   m_TagString: Player
@@ -1116,7 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: 0
-  pauseMenuObject: {fileID: 1752190194}
+  pauseMenuObject: {fileID: 2010837363}
   speed: 10
   moveX: 0
   FishCollected: 0
@@ -1242,6 +1243,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &556242328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556242320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1b2a51c3a9fb44887e6e186a6c8700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: 0
+  muted: 0
+  reelSound: {fileID: 0}
+  diveSound: {fileID: 556242329}
 --- !u!82 &556242329
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3015,7 +3032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.52156866, g: 0.7686275, b: 0.93725497, a: 1}
+  m_Color: {r: 0.52156866, g: 0.7686275, b: 0.93725497, a: 0.40784314}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

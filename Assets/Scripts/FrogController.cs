@@ -75,8 +75,8 @@ public class FrogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //pauseMenu = pauseMenuObject.GetComponent<PauseMenuController>().menuActivated;
-        
+        pauseMenu = pauseMenuObject.GetComponent<PauseMenuController>().menuActivated;
+
         Move();
         BoundMovement();
 
@@ -243,6 +243,8 @@ public class FrogController : MonoBehaviour
 
     public void ReelPosition()
     {
+        
+
         //move to reel position
 
         //only activate if the menu isn't open
@@ -251,7 +253,7 @@ public class FrogController : MonoBehaviour
         float reelingPositionY = reelingPosition.transform.position.y;
         float reelingPositionBuffer = reelingPositionY - 1;
 
-        if ((reachedReelPos == false) && (isReeling == true))
+        if ((reachedReelPos == false) && (isReeling == true) && (pauseMenu == false))
         {
 
             newYPos -= yPosIncrement;
@@ -323,7 +325,7 @@ public class FrogController : MonoBehaviour
         float startPositionY = startPosition.transform.position.y;
         float startPositionBuffer = startPositionY + 1;
 
-        if (reachedSurface == true)
+        if (reachedSurface == true && pauseMenu == false)
         {
             currentPosition = Vector3.Lerp(this.transform.position,
                 new Vector3(
