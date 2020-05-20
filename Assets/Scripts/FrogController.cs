@@ -37,7 +37,7 @@ public class FrogController : MonoBehaviour
     public Animator animator;
 
     public AudioSource diveSound;
-    public AudioClip reelSound;
+    public AudioSource reelSound;
     public AudioSource enemyHit;
     public AudioSource collectFish;
 
@@ -92,12 +92,19 @@ public class FrogController : MonoBehaviour
         {
             animator.SetBool("IsReel", true);
             animator.SetBool("IsDive", false);
-            AudioSource.PlayClipAtPoint(reelSound, this.transform.position);
+
+            if (reelSound.isPlaying == false)
+            {
+                reelSound.Play();
+            }
+            
+            
         }
         else
         {
             animator.SetBool("IsDive", true);
             animator.SetBool("IsReel", false);
+
         }
 
 
