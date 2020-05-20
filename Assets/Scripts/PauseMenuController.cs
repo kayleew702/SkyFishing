@@ -13,6 +13,8 @@ public class PauseMenuController : MonoBehaviour
     private Text currentScoreText;
     private Text currenthighScoreText;
 
+    public bool menuActivated;
+
     void UpdateScore()
     {
         GetScore();
@@ -33,6 +35,8 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1;
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPaused");
         DeactivateMenu();
+
+        menuActivated = false;
     }
 
     void Update()
@@ -65,6 +69,7 @@ public class PauseMenuController : MonoBehaviour
             g.SetActive(true);
             UpdateScore();
         }
+        menuActivated = true;
     }
 
     public void DeactivateMenu()
@@ -74,5 +79,6 @@ public class PauseMenuController : MonoBehaviour
             g.SetActive(false);
         }
         Time.timeScale = 1;
+        menuActivated = false;
     }
 }

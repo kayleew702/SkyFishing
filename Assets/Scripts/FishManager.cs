@@ -55,14 +55,14 @@ public class FishManager : MonoBehaviour
         spawnY = Random.Range(-4, 4);
         //Debug.Log(spawnY);
 
-        if (spawning == false && isReeling == false)
+        if (spawning == false && isReeling == false && reachedSurface == false)
         {
             spawning = true;
             divingCoroutine = StartCoroutine(SpawnFishTimer());
         }
 
         //if the frog is reeling, stop spawning fish from bottom and start spawning them from top
-        else if (spawning == false && isReeling == true)
+        else if (spawning == false && isReeling == true && reachedSurface == false)
         {
             spawning = true;
             StopCoroutine(divingCoroutine);
@@ -117,7 +117,7 @@ public class FishManager : MonoBehaviour
 
         //speed = -5f;
         //GameObject.Find("Fish").GetComponent<FishController>().speed = -5f;
-        maxTimer = Random.Range(timerMin, timerMax);
+        maxTimer = Random.Range(timerMin/2, timerMax/2);
         timer += 0.5f;
         yield return new WaitForSeconds(maxTimer);
         Instantiate(fishCollectible, new Vector2(spawnY, reelingSpawnY), fishCollectible.rotation);

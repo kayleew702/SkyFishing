@@ -1115,7 +1115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21019deec0bd4a7ba9ef463bf7caea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  pauseMenu: 0
+  pauseMenuObject: {fileID: 1752190194}
+  speed: 10
   moveX: 0
   FishCollected: 0
   totalFish: 0
@@ -1126,7 +1128,7 @@ MonoBehaviour:
   leftBoundary: {fileID: 854639232}
   rightBoundary: {fileID: 1123809220}
   newYPos: 0
-  yPosIncrement: 0.025
+  yPosIncrement: 5
   animator: {fileID: 556242321}
   diveSound: {fileID: 556242329}
   reelSound: {fileID: 8300000, guid: 5f21fadee93c20844b21213bdc9f3dd1, type: 3}
@@ -2259,7 +2261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highScore: 0
-  highScoreText: {fileID: 1166703191}
 --- !u!1 &1309657049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3014,7 +3015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.20932718, g: 0.28084546, b: 0.4528302, a: 0.4509804}
+  m_Color: {r: 0.52156866, g: 0.7686275, b: 0.93725497, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3763,6 +3764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1752190194}
+  menuActivated: 0
 --- !u!4 &2010837365
 Transform:
   m_ObjectHideFlags: 0

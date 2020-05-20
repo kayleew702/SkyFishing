@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7602759438765013235}
   - component: {fileID: 5327477443633472476}
   - component: {fileID: 88886951565903633}
+  - component: {fileID: 3970517905800924056}
   m_Layer: 0
   m_Name: jellyfish
   m_TagString: Enemy
@@ -157,3 +158,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3970517905800924056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589129183427497766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd35f826bc686b946a2264da376d3bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

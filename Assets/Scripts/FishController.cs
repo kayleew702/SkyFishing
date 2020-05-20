@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class FishController : MonoBehaviour
 {
-    public float downSpeed = -1.5f;
-    public 
-        float upSpeed = 1.5f;
+    public float downSpeed = -5f;
+    public float upSpeed = 1.5f;
     private Rigidbody2D rb;
 
     public bool isReeling;
@@ -42,5 +41,7 @@ public class FishController : MonoBehaviour
             Debug.Log("Fish destroyed");
             Destroy(this.gameObject);
         }
+
+
     }
 }

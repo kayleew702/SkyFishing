@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class FrogController : MonoBehaviour
 {
+    public bool pauseMenu;
+    public GameObject pauseMenuObject;
+
     public float speed = 5;
     //private float moveY;
     public float moveX;
@@ -43,6 +46,7 @@ public class FrogController : MonoBehaviour
     public bool isDiving;
     public bool reachedSurface;
 
+
     public int currentDepth;
 
     //Gives access to fish collected text in UI
@@ -64,12 +68,15 @@ public class FrogController : MonoBehaviour
         animator.SetBool("IsDive", true);
         animator.SetBool("IsReel", false);
         diveSound.Play();
+
+        pauseMenu = pauseMenuObject.GetComponent<PauseMenuController>().menuActivated;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //pauseMenu = pauseMenuObject.GetComponent<PauseMenuController>().menuActivated;
+        
         Move();
         BoundMovement();
 
@@ -184,7 +191,7 @@ public class FrogController : MonoBehaviour
 
             //runs the UpdateFishCollected method, which updates the fishCollectedText game object
             fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
-            highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
+            //highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
             FishCollected = 0;
             GameObject.Destroy(collision.gameObject);
             Invoke("ResetBools", 2f);
@@ -238,6 +245,9 @@ public class FrogController : MonoBehaviour
     {
         //move to reel position
 
+        //only activate if the menu isn't open
+
+
         float reelingPositionY = reelingPosition.transform.position.y;
         float reelingPositionBuffer = reelingPositionY - 1;
 
@@ -283,7 +293,7 @@ public class FrogController : MonoBehaviour
         {
             isReeling = false;
             reachedSurface = true;
-            highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
+            //highScoreText.GetComponent<HighScoreController>().UpdateHighScore();
             Invoke("EndScore", 2f);
             Invoke("LoadMenu", 5f);
         }

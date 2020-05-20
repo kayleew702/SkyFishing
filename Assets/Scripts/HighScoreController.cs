@@ -7,38 +7,38 @@ public class HighScoreController : MonoBehaviour
 {
 
     public int highScore;
-    private int fishCollected;
-    public Text highScoreText;
     private Text fishCollectedText;
+    private bool reachedSurface;
 
-    private void Awake()
-    {
-        if (PlayerPrefs.HasKey("HighScore"))
-        {
-            highScore = PlayerPrefs.GetInt("HighScore");
-            highScoreText.text = highScore.ToString();
-        }
-    }
+
     // Start is called before the first frame update
     void Start()
     {
+        reachedSurface = false;
+
+        //highScore saved between games as player preference
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        //and it's written to the high score game object that the script is attached to
+        GetComponent<Text>().text = "High Score:  " + highScore.ToString();
+
         fishCollectedText = GameObject.Find("FishCollectedText").GetComponent<Text>();
     }
 
     // Update is called once per frame
-    public void UpdateHighScore()
+    void Update()
     {
-        fishCollected = GameObject.Find("frog").GetComponent<FrogController>().FishCollected;
+        reachedSurface = GameObject.Find("frog").GetComponent<FrogController>().reachedSurface;
+        //score will update if frog has returned to the starting point and has caught enough fish
 
-        if (fishCollected > highScore)
+        //score from fishCollectedController
+        int fishCollected = fishCollectedText.GetComponent<FishCollectedController>().fishCollected;
+        if ((fishCollected > highScore) && reachedSurface == true)
         {
+            //update high score
             highScore = fishCollected;
-
-            highScoreText.text = "High Score:" + highScore.ToString();
-
-            PlayerPrefs.SetInt("highScore", highScore);
+            PlayerPrefs.SetInt("HighScore", fishCollected);
+            GetComponent<Text>().text = "HighScore:  " + fishCollected;
         }
-
-        fishCollectedText.GetComponent<FishCollectedController>().UpdateFishCollected();
     }
 }
