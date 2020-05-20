@@ -53,6 +53,9 @@ public class FrogController : MonoBehaviour
     private Text fishCollectedText;
     private Text highScoreText;
 
+    private float cameraTop;
+    private float cameraBottom;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +78,10 @@ public class FrogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        cameraTop = (Camera.main.transform.position.y + Camera.main.orthographicSize) - (frogSize.y / 2) - 1;
+        cameraBottom = (Camera.main.transform.position.y - Camera.main.orthographicSize) + (frogSize.y / 2) + 1;
+
         pauseMenu = pauseMenuObject.GetComponent<PauseMenuController>().menuActivated;
 
         Move();
@@ -270,11 +277,11 @@ public class FrogController : MonoBehaviour
                 newYPos = this.transform.position.y;
             }
             
-
+            //clamp frog position within camera view
             currentPosition = Vector3.Lerp(this.transform.position,
             new Vector3(
                 this.transform.position.x,
-                Mathf.Clamp(newYPos, this.transform.position.y, reelingPositionBuffer),
+                Mathf.Clamp(newYPos, cameraBottom - 10, cameraBottom - 9),
                 this.transform.position.z),
             smoothSpeed);
 
@@ -337,7 +344,7 @@ public class FrogController : MonoBehaviour
             currentPosition = Vector3.Lerp(this.transform.position,
                 new Vector3(
                     this.transform.position.x,
-                    Mathf.Clamp(newYPos, startPositionBuffer, this.transform.position.y),
+                    Mathf.Clamp(newYPos, cameraBottom, startPositionY),
                     this.transform.position.z),
                 smoothSpeed);
 
@@ -360,7 +367,7 @@ public class FrogController : MonoBehaviour
             currentPosition = Vector3.Lerp(this.transform.position,
                 new Vector3(
                     this.transform.position.x,
-                    Mathf.Clamp(newYPos, this.transform.position.y, divingPositionBuffer),
+                    Mathf.Clamp(newYPos, divingPositionY, cameraTop),
                     this.transform.position.z),
                 smoothSpeed);
 
