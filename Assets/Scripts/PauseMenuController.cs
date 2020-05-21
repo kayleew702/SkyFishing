@@ -14,6 +14,7 @@ public class PauseMenuController : MonoBehaviour
     private Text currenthighScoreText;
 
     public bool menuActivated;
+    public bool bigScoreDisplaying;
 
     void UpdateScore()
     {
@@ -41,7 +42,9 @@ public class PauseMenuController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+
+        if (Input.GetKeyDown(KeyCode.Space) && bigScoreDisplaying == false)
         {
             if (Time.timeScale == 1)
             {
@@ -55,6 +58,8 @@ public class PauseMenuController : MonoBehaviour
                 DeactivateMenu();
             }
         }
+
+        bigScoreDisplaying = GameObject.Find("BigScore").GetComponent<BigScoreScript>().bigScoreDisplaying;
     }
 
     public void Reload()

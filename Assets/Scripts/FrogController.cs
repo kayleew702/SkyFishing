@@ -18,7 +18,7 @@ public class FrogController : MonoBehaviour
     public int FishCollected = 0;
     public int totalFish = 0;
 
-    private float smoothSpeed = 0.01f;
+    public float smoothSpeed = 0.23f;
 
     public Vector3 currentPosition;
     private Vector3 frogSize;
@@ -80,7 +80,7 @@ public class FrogController : MonoBehaviour
     {
 
         cameraTop = (Camera.main.transform.position.y + Camera.main.orthographicSize) - (frogSize.y / 2) - 1;
-        cameraBottom = (Camera.main.transform.position.y - Camera.main.orthographicSize) + (frogSize.y / 2) + 1;
+        cameraBottom = GameObject.Find("cameraBottom").transform.position.y + (frogSize.y / 2);
 
         pauseMenu = pauseMenuObject.GetComponent<PauseMenuController>().menuActivated;
 
@@ -273,7 +273,7 @@ public class FrogController : MonoBehaviour
 
             newYPos -= yPosIncrement;
 
-            if (newYPos < this.transform.position.y)
+            if (newYPos > this.transform.position.y)
             {
                 newYPos = this.transform.position.y;
             }
@@ -282,9 +282,16 @@ public class FrogController : MonoBehaviour
             currentPosition = Vector3.Lerp(this.transform.position,
             new Vector3(
                 this.transform.position.x,
-                Mathf.Clamp(newYPos, cameraBottom - 10, cameraBottom - 9),
+                cameraBottom - 2,
                 this.transform.position.z),
-            smoothSpeed);
+            .095f);
+
+            if (currentPosition.y < cameraBottom)
+            {
+                currentPosition.y = cameraBottom;
+            }
+
+            //currentPosition.y = cameraBottom;
 
             //currentPosition = new Vector3(this.transform.position.x, newYPos, this.transform.position.z);
 
@@ -345,9 +352,13 @@ public class FrogController : MonoBehaviour
             currentPosition = Vector3.Lerp(this.transform.position,
                 new Vector3(
                     this.transform.position.x,
-                    Mathf.Clamp(newYPos, cameraBottom, startPositionY),
+                    cameraBottom,
                     this.transform.position.z),
                 smoothSpeed);
+            if (currentPosition.y < cameraBottom + .2f)
+            {
+                currentPosition.y = cameraBottom + .2f;
+            }
 
             this.transform.position = currentPosition;
         }
@@ -371,6 +382,11 @@ public class FrogController : MonoBehaviour
                     Mathf.Clamp(newYPos, divingPositionY, cameraTop),
                     this.transform.position.z),
                 smoothSpeed);
+
+            if (currentPosition.y < cameraBottom)
+            {
+                currentPosition.y = cameraBottom;
+            }
 
             this.transform.position = currentPosition;
         }

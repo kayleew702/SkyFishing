@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
     //camera only moves in y direction
     //have a beginning position and ending position as empty game objects (at the top of the camera)
 
-    private float smoothSpeed = 0.01f;
+    public float smoothSpeed = 0.05f;
     public float cameraIncrement = .01f;
     public float reelingCamInc = 10;
 
@@ -140,7 +140,7 @@ public class CameraMovement : MonoBehaviour
             currentPosition = Vector3.Lerp(this.transform.position,
                 new Vector3(
                     this.transform.position.x,
-                    Mathf.Clamp(newYPos, this.transform.position.y, startingPointBuffer),
+                    Mathf.Clamp(newYPos, this.transform.position.y, 0),
                     this.transform.position.z),
                 smoothSpeed);
 

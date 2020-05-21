@@ -7,7 +7,8 @@ public class ScrollingWaterFlip : MonoBehaviour
     public GameObject scrollingWater1;
     public GameObject scrollingWater2;
     public GameObject scrollingWater3;
-    public float scrollingSpeed;
+    public float diveSpeed;
+    public float reelSpeed;
 
     public GameObject frogPlayer;
     public bool frogIsReeling;
@@ -31,7 +32,7 @@ public class ScrollingWaterFlip : MonoBehaviour
         //if the frog is reeling, reverse the direction of the scrolling water
         if (frogIsReeling == true)
         {
-            FlipSpeed();
+            ReverseSpeed();
         }
 
         //if the frog has reached the surface, stop the scrolling water
@@ -41,21 +42,13 @@ public class ScrollingWaterFlip : MonoBehaviour
         }
     }
 
-    void FlipSpeed()
-    {
-        foreach (GameObject item in scrollingWaterList)
-        {
-            scrollingSpeed = item.GetComponent<BackgroundController>().scrollSpeed;
-            item.GetComponent<BackgroundController>().scrollSpeed = Mathf.Abs(scrollingSpeed);
-        }
-    }
 
     void StopSpeed()
     {
         foreach (GameObject item in scrollingWaterList)
         {
-            scrollingSpeed = item.GetComponent<BackgroundController>().scrollSpeed;
-            item.GetComponent<BackgroundController>().scrollSpeed = 0;
+            diveSpeed = item.GetComponent<BackgroundController>().scrollSpeed;
+            item.GetComponent<BackgroundController>().scrollSpeed = .3f;
         }
     }
 
@@ -69,7 +62,11 @@ public class ScrollingWaterFlip : MonoBehaviour
     public void ReverseSpeed()
     {
         //when the frog player is reeling, the scrolling water will move the opposite direction
-        scrollingSpeed = 0 - scrollingSpeed;
+        foreach (GameObject item in scrollingWaterList)
+        {
+            diveSpeed = item.GetComponent<BackgroundController>().scrollSpeed;
+            item.GetComponent<BackgroundController>().scrollSpeed = reelSpeed;
+        }
     }
 
     

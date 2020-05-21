@@ -12,12 +12,19 @@ public class BigScoreScript : MonoBehaviour
     private int fishScore;
     private Text fishScoreBig;
 
+    public bool bigScoreDisplaying;
+
+    void Start()
+    {
+        bigScoreDisplaying = false;
+    }
     public void ShowScore()
     {
         GetScore();
         highScoreBig.text = "High Score: " + highScore;
         fishScoreBig.text = "Fish Collected: " + fishScore;
         Debug.Log("Show Score works");
+        bigScoreDisplaying = true;
 
     }
 
